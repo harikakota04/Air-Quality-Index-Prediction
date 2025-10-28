@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AQI Prediction System - Home</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom right, #ebf8ff, #ede9fe);
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .header h1 {
+      font-size: 2.5rem;
+      color: #2563eb;
+    }
+    .card {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .aqi-range {
+      margin-bottom: 20px;
+      padding: 15px;
+      border-radius: 8px;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+    .button-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .button {
+      background-color: #2563eb;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform 0.2s ease-in-out;
+    }
+    .button:hover {
+      background-color: #1d4ed8;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <div class="min-h-screen">
+    <div class="container">
+      <div class="header">
+        <h1>AQI Prediction System</h1>
+      </div>
+
+      <div class="card">
+        <h2>What is Air Quality Index (AQI)?</h2>
+        <p>The Air Quality Index (AQI) is a standardized indicator of air quality levels. It helps you understand how clean or polluted your air is and what associated health effects might be a concern.</p>
+        <div class="alert" style="background-color: #fee2e2; border-left: 4px solid #f87171; padding: 10px;">
+          <p style="color: #b91c1c;">High AQI levels can lead to respiratory issues like asthma and bronchitis, and an increased risk of cardiovascular disorders like heart attacks and strokes, especially in those exposed to contaminated air.</p>
+        </div>
+      </div>
+
+      <div id="aqi-ranges">
+        <!-- AQI ranges will be dynamically added here -->
+      </div>
+
+      <!-- Button to navigate to the Predict Page -->
+      <div class="button-container">
+        <button class="button" onclick="navigateToPredict()">Make AQI Prediction</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // AQI ranges data
+    const AQI_RANGES = [
+      { level: 'Good', min: 0, max: 50, color: '#00E400', message: 'Air quality is considered satisfactory.' },
+      { level: 'Moderate', min: 51, max: 100, color: '#FFDD44', message: 'Air quality is acceptable; some pollutants may affect sensitive groups.' },
+      { level: 'Unhealthy for Sensitive Groups', min: 101, max: 150, color: '#FF7E00', message: 'Members of sensitive groups may experience health effects.' },
+      { level: 'Unhealthy', min: 151, max: 200, color: '#FF0000', message: 'Everyone may begin to experience health effects.' },
+      { level: 'Very Unhealthy', min: 201, max: 300, color: '#8F3F97', message: 'Health alert: everyone may experience serious health effects.' },
+      { level: 'Hazardous', min: 301, max: 500, color: '#7E0023', message: 'Health warnings of emergency conditions.' },
+    ];
+
+    // Render AQI ranges dynamically
+    const aqiRangesContainer = document.getElementById('aqi-ranges');
+    AQI_RANGES.forEach(range => {
+      const rangeDiv = document.createElement('div');
+      rangeDiv.className = 'aqi-range';
+      rangeDiv.style.backgroundColor = `${range.color}`;
+      rangeDiv.innerHTML = `
+        <h3>${range.level} (${range.min}-${range.max})</h3>
+        <p>${range.message}</p>
+      `;
+      aqiRangesContainer.appendChild(rangeDiv);
+    });
+
+    // Function to navigate to the Predict Page
+    function navigateToPredict() {
+      window.location.href = 'predict.html'; // Redirect to predict.html
+    }
+  </script>
+</body>
+</html>
